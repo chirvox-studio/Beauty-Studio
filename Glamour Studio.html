@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beauty-Studio – Beauty & Salon, Belagavi</title>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Didact+Gothic&family=Cardo:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --plum: #4A1A5C;
+    --deep: #2A0C38;
+    --rose: #C06080;
+    --blush: #E8A0B0;
+    --gold: #D4A85A;
+    --light: #F9F0F5;
+    --white: #FDFAFC;
+    --text: #2A1030;
+    --muted: rgba(42,16,48,0.6);
+    --border: rgba(192,96,128,0.25);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Didact Gothic',sans-serif; background:var(--white); color:var(--text); }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; width:100%; z-index:100;
+    background:rgba(42,12,56,0.97); backdrop-filter:blur(14px);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 60px;
+  }
+  .logo { font-family:'Italiana',serif; font-size:1.6rem; color:var(--blush); letter-spacing:3px; }
+  .nav-links { display:flex; gap:32px; list-style:none; }
+  .nav-links a { color:rgba(249,240,245,0.65); text-decoration:none; font-size:.75rem; letter-spacing:2px; text-transform:uppercase; transition:.3s; }
+  .nav-links a:hover { color:var(--blush); }
+  .nav-book { background:var(--rose); color:#fff; padding:10px 24px; font-size:.75rem; letter-spacing:2px; text-transform:uppercase; text-decoration:none; transition:.3s; border-radius:2px; }
+  .nav-book:hover { background:#a04060; }
+
+  /* HERO */
+  #hero {
+    min-height:100vh; display:flex; align-items:center;
+    background:linear-gradient(150deg, var(--deep) 0%, var(--plum) 60%, #5A1A4A 100%);
+    position:relative; overflow:hidden;
+  }
+  .hero-circles {
+    position:absolute; inset:0; pointer-events:none;
+  }
+  .hero-circles::before { content:''; position:absolute; top:-100px; right:-100px; width:500px; height:500px; border-radius:50%; background:radial-gradient(circle,rgba(192,96,128,0.18),transparent 70%); }
+  .hero-circles::after { content:''; position:absolute; bottom:-150px; left:-150px; width:600px; height:600px; border-radius:50%; background:radial-gradient(circle,rgba(212,168,90,0.1),transparent 70%); }
+  .floral-bg {
+    position:absolute; inset:0; opacity:.04;
+    background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23E8A0B0' fill-opacity='1'%3E%3Ccircle cx='40' cy='40' r='3'/%3E%3Ccircle cx='10' cy='10' r='2'/%3E%3Ccircle cx='70' cy='10' r='2'/%3E%3Ccircle cx='10' cy='70' r='2'/%3E%3Ccircle cx='70' cy='70' r='2'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-inner { max-width:1200px; margin:0 auto; padding:120px 60px 80px; display:grid; grid-template-columns:1.1fr 1fr; gap:80px; align-items:center; z-index:2; position:relative; }
+  .hero-tag { display:inline-flex; align-items:center; gap:10px; border:1px solid rgba(232,160,176,0.35); padding:8px 18px; margin-bottom:28px; }
+  .hero-tag span { font-size:.65rem; letter-spacing:4px; text-transform:uppercase; color:var(--blush); }
+  .hero-title { font-family:'Italiana',serif; font-size:clamp(3.5rem,8vw,6rem); line-height:1.05; color:var(--light); margin-bottom:24px; }
+  .hero-title em { color:var(--blush); }
+  .hero-sub { font-size:.95rem; color:rgba(249,240,245,0.6); line-height:1.9; margin-bottom:40px; max-width:460px; }
+  .hero-btns { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:50px; }
+  .btn-rose { background:var(--rose); color:#fff; padding:13px 32px; font-size:.75rem; letter-spacing:3px; text-transform:uppercase; text-decoration:none; transition:.3s; border-radius:2px; }
+  .btn-rose:hover { background:#a04060; }
+  .btn-outline { border:1px solid rgba(232,160,176,0.4); color:var(--blush); padding:13px 32px; font-size:.75rem; letter-spacing:3px; text-transform:uppercase; text-decoration:none; transition:.3s; border-radius:2px; }
+  .btn-outline:hover { border-color:var(--blush); }
+  .hero-trust { display:flex; gap:24px; flex-wrap:wrap; }
+  .trust { display:flex; align-items:center; gap:8px; }
+  .trust span { font-size:.75rem; color:rgba(249,240,245,0.45); letter-spacing:1px; }
+  .hero-visual { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .v-box { border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:3.5rem; position:relative; overflow:hidden; transition:.3s; }
+  .v-box:hover { border-color:rgba(232,160,176,0.5); }
+  .v-box:first-child { grid-column:span 2; aspect-ratio:2/1; font-size:5rem; background:linear-gradient(135deg,#5A1A4A,#3A0C2A); }
+  .v-box:nth-child(2),.v-box:nth-child(3) { aspect-ratio:1/1; background:linear-gradient(135deg,#4A1A3A,#2A0C20); }
+
+  /* SERVICES */
+  #services { background:var(--light); padding:90px 60px; }
+  .svc-inner { max-width:1200px; margin:0 auto; }
+  .section-top { margin-bottom:50px; }
+  .section-tag { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+  .section-tag .dot { width:6px; height:6px; border-radius:50%; background:var(--rose); }
+  .section-tag span { font-size:.65rem; letter-spacing:4px; text-transform:uppercase; color:var(--rose); }
+  .section-title { font-family:'Italiana',serif; font-size:clamp(2rem,5vw,3rem); color:var(--plum); }
+  .svc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:20px; }
+  .svc-card { background:var(--white); border:1px solid var(--border); padding:32px 24px; transition:.3s; position:relative; overflow:hidden; }
+  .svc-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--rose),var(--blush)); transform:scaleX(0); transition:.3s; transform-origin:left; }
+  .svc-card:hover { border-color:var(--rose); transform:translateY(-3px); }
+  .svc-card:hover::before { transform:scaleX(1); }
+  .svc-icon { font-size:2.2rem; margin-bottom:16px; }
+  .svc-card h3 { font-family:'Italiana',serif; font-size:1.4rem; color:var(--plum); margin-bottom:10px; }
+  .svc-card p { font-size:.85rem; color:var(--muted); line-height:1.7; margin-bottom:16px; }
+  .svc-price { color:var(--rose); font-size:.85rem; font-weight:500; letter-spacing:1px; }
+
+  /* PRICING */
+  #pricing { background:var(--white); padding:90px 60px; }
+  .pricing-inner { max-width:1100px; margin:0 auto; }
+  .pricing-tabs { display:flex; gap:0; border-bottom:1px solid var(--border); margin-bottom:40px; }
+  .ptab { background:none; border:none; padding:12px 28px; color:var(--muted); cursor:pointer; font-family:'Didact Gothic',sans-serif; font-size:.8rem; letter-spacing:2px; text-transform:uppercase; transition:.3s; border-bottom:2px solid transparent; margin-bottom:-1px; }
+  .ptab.active { color:var(--rose); border-bottom-color:var(--rose); }
+  .price-list { display:flex; flex-direction:column; gap:0; }
+  .price-row { display:flex; align-items:center; justify-content:space-between; padding:18px 0; border-bottom:1px solid rgba(192,96,128,0.1); transition:.3s; }
+  .price-row:hover { padding-left:12px; }
+  .price-name { font-size:.95rem; color:var(--text); }
+  .price-time { font-size:.8rem; color:var(--muted); margin-left:12px; }
+  .price-amount { font-family:'Italiana',serif; font-size:1.2rem; color:var(--rose); }
+
+  /* GALLERY */
+  #gallery { background:var(--light); padding:90px 60px; }
+  .gal-inner { max-width:1200px; margin:0 auto; }
+  .gal-grid { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:auto auto; gap:12px; margin-top:40px; }
+  .g-item { border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:3rem; overflow:hidden; transition:.3s; min-height:180px; position:relative; }
+  .g-item:hover { border-color:var(--rose); }
+  .g-item:first-child { grid-row:span 2; min-height:370px; font-size:5rem; background:linear-gradient(160deg,#5A1A4A,#3A0C2A); }
+  .g-item:nth-child(2) { background:linear-gradient(160deg,#4A1540,#2A0820); }
+  .g-item:nth-child(3) { background:linear-gradient(160deg,#3A1030,#200618); }
+  .g-item:nth-child(4) { background:linear-gradient(160deg,#4A1840,#2A0A28); }
+  .g-item:nth-child(5) { background:linear-gradient(160deg,#3A1238,#1E0620); }
+  .g-overlay { position:absolute; inset:0; background:rgba(74,26,92,0); transition:.3s; }
+  .g-item:hover .g-overlay { background:rgba(74,26,92,0.3); }
+
+  /* BOOKING */
+  #booking { background:linear-gradient(150deg,var(--deep),var(--plum)); padding:90px 60px; }
+  .booking-inner { max-width:900px; margin:0 auto; text-align:center; }
+  .booking-title { font-family:'Italiana',serif; font-size:clamp(2rem,5vw,3.5rem); color:var(--light); margin-bottom:12px; }
+  .booking-sub { color:rgba(249,240,245,0.6); font-size:.9rem; margin-bottom:50px; }
+  .booking-form { display:grid; grid-template-columns:1fr 1fr; gap:16px; text-align:left; }
+  .bf { display:flex; flex-direction:column; gap:8px; }
+  .bf.full { grid-column:span 2; }
+  .bf label { font-size:.65rem; letter-spacing:3px; text-transform:uppercase; color:var(--blush); }
+  .bf input, .bf select, .bf textarea { background:rgba(255,255,255,0.06); border:1px solid rgba(232,160,176,0.3); color:var(--light); padding:13px 16px; font-family:'Didact Gothic',sans-serif; font-size:.9rem; outline:none; transition:.3s; border-radius:2px; }
+  .bf input:focus, .bf select:focus { border-color:var(--blush); background:rgba(255,255,255,0.1); }
+  .bf select option { background:var(--plum); }
+  .bf textarea { min-height:80px; resize:vertical; }
+  .book-btn { grid-column:span 2; background:var(--rose); color:#fff; border:none; padding:15px; font-family:'Didact Gothic',sans-serif; font-size:.85rem; letter-spacing:3px; text-transform:uppercase; cursor:pointer; transition:.3s; border-radius:2px; }
+  .book-btn:hover { background:#a04060; }
+  .wa-note { grid-column:span 2; text-align:center; }
+  .wa-note p { color:rgba(249,240,245,0.5); font-size:.8rem; margin-bottom:12px; }
+  .wa-link { display:inline-flex; align-items:center; gap:10px; background:#25D366; color:#fff; padding:12px 28px; text-decoration:none; font-size:.8rem; letter-spacing:2px; text-transform:uppercase; transition:.3s; border-radius:2px; }
+  .wa-link:hover { background:#1da851; }
+
+  /* FOOTER */
+  footer { background:var(--deep); padding:30px 60px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
+  .footer-logo { font-family:'Italiana',serif; font-size:1.3rem; color:var(--blush); letter-spacing:3px; }
+  .footer-text { font-size:.8rem; color:rgba(249,240,245,0.3); }
+
+  @media(max-width:768px){
+    nav { padding:14px 20px; }
+    .nav-links { display:none; }
+    .hero-inner { grid-template-columns:1fr; padding:100px 20px 60px; }
+    .hero-visual { display:none; }
+    #services,#pricing,#gallery,#booking { padding:60px 20px; }
+    .gal-grid { grid-template-columns:1fr 1fr; }
+    .g-item:first-child { grid-column:span 2; grid-row:auto; }
+    .booking-form { grid-template-columns:1fr; }
+    .bf.full,.book-btn,.wa-note { grid-column:span 1; }
+    footer { flex-direction:column; text-align:center; padding:24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Beauty-Studio</div>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#booking">Book</a></li>
+  </ul>
+  <a href="#booking" class="nav-book">Book Appointment</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="floral-bg"></div>
+  <div class="hero-circles"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag"><span>✦ Beauty & Wellness Studio ✦</span></div>
+      <h1 class="hero-title">Where Beauty<br>Finds Its <em>Glow</em></h1>
+      <p class="hero-sub">Beauty-Studio is Belagavi's destination for elegant transformations. From signature facials to bridal makeovers — we bring your best self forward.</p>
+      <div class="hero-btns">
+        <a href="#booking" class="btn-rose">Book Appointment</a>
+        <a href="#services" class="btn-outline">View Services</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust"><span>💅</span><span>12+ Services</span></div>
+        <div class="trust"><span>⭐</span><span>500+ Happy Clients</span></div>
+        <div class="trust"><span>📲</span><span>WhatsApp Booking</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="v-box">💅</div>
+      <div class="v-box">✨</div>
+      <div class="v-box">💆</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="svc-inner">
+    <div class="section-top">
+      <div class="section-tag"><div class="dot"></div><span>Our Services</span></div>
+      <h2 class="section-title">A Menu of Elegance</h2>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card"><div class="svc-icon">💆</div><h3>Signature Facial</h3><p>Deep cleansing, hydration, and glow treatments tailored to your skin type.</p><div class="svc-price">From ₹799</div></div>
+      <div class="svc-card"><div class="svc-icon">💇</div><h3>Hair Styling</h3><p>Cuts, blowouts, and styling by trained professionals using premium products.</p><div class="svc-price">From ₹499</div></div>
+      <div class="svc-card"><div class="svc-icon">💅</div><h3>Nail Art & Manicure</h3><p>Gel nails, French tips, nail art, and complete hand care treatments.</p><div class="svc-price">From ₹399</div></div>
+      <div class="svc-card"><div class="svc-icon">👰</div><h3>Bridal Packages</h3><p>Complete bridal makeover — mehendi, makeup, hair, and pre-bridal treatment.</p><div class="svc-price">From ₹8,999</div></div>
+      <div class="svc-card"><div class="svc-icon">🧴</div><h3>Hair Spa & Treatment</h3><p>Keratin, argan oil, protein, and smoothening treatments for all hair types.</p><div class="svc-price">From ₹1,299</div></div>
+      <div class="svc-card"><div class="svc-icon">🌸</div><h3>Body Polishing</h3><p>Full-body exfoliation and moisturization for a radiant, silky smooth skin.</p><div class="svc-price">From ₹1,499</div></div>
+      <div class="svc-card"><div class="svc-icon">🎨</div><h3>Makeup Services</h3><p>Party, reception, photoshoot, and everyday makeup by certified artists.</p><div class="svc-price">From ₹999</div></div>
+      <div class="svc-card"><div class="svc-icon">🧖</div><h3>Threading & Waxing</h3><p>Precision threading and gentle waxing services for face and body.</p><div class="svc-price">From ₹150</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="pricing-inner">
+    <div class="section-top">
+      <div class="section-tag"><div class="dot" style="background:var(--rose)"></div><span>Service Menu</span></div>
+      <h2 class="section-title" style="color:var(--plum);">Transparent Pricing</h2>
+    </div>
+    <div class="pricing-tabs">
+      <button class="ptab active" onclick="showPricing(this,'skin')">Skin & Face</button>
+      <button class="ptab" onclick="showPricing(this,'hair')">Hair</button>
+      <button class="ptab" onclick="showPricing(this,'nail')">Nails</button>
+      <button class="ptab" onclick="showPricing(this,'bridal')">Bridal</button>
+    </div>
+    <div id="skin" class="price-list">
+      <div class="price-row"><div><span class="price-name">Basic Facial</span><span class="price-time">45 min</span></div><div class="price-amount">₹799</div></div>
+      <div class="price-row"><div><span class="price-name">Signature Glow Facial</span><span class="price-time">60 min</span></div><div class="price-amount">₹1,299</div></div>
+      <div class="price-row"><div><span class="price-name">Gold Radiance Facial</span><span class="price-time">75 min</span></div><div class="price-amount">₹1,899</div></div>
+      <div class="price-row"><div><span class="price-name">De-tan Treatment</span><span class="price-time">45 min</span></div><div class="price-amount">₹999</div></div>
+      <div class="price-row"><div><span class="price-name">Body Polishing (Full)</span><span class="price-time">90 min</span></div><div class="price-amount">₹2,499</div></div>
+      <div class="price-row"><div><span class="price-name">Face Threading</span><span class="price-time">20 min</span></div><div class="price-amount">₹150</div></div>
+    </div>
+    <div id="hair" class="price-list" style="display:none;">
+      <div class="price-row"><div><span class="price-name">Haircut & Styling</span><span class="price-time">30–45 min</span></div><div class="price-amount">₹499</div></div>
+      <div class="price-row"><div><span class="price-name">Blowout & Blowdry</span><span class="price-time">45 min</span></div><div class="price-amount">₹699</div></div>
+      <div class="price-row"><div><span class="price-name">Hair Spa (Basic)</span><span class="price-time">60 min</span></div><div class="price-amount">₹1,299</div></div>
+      <div class="price-row"><div><span class="price-name">Keratin Treatment</span><span class="price-time">2.5 hrs</span></div><div class="price-amount">₹3,999</div></div>
+      <div class="price-row"><div><span class="price-name">Balayage / Highlights</span><span class="price-time">2+ hrs</span></div><div class="price-amount">₹2,999+</div></div>
+      <div class="price-row"><div><span class="price-name">Global Hair Colour</span><span class="price-time">1.5 hrs</span></div><div class="price-amount">₹1,499+</div></div>
+    </div>
+    <div id="nail" class="price-list" style="display:none;">
+      <div class="price-row"><div><span class="price-name">Basic Manicure</span><span class="price-time">30 min</span></div><div class="price-amount">₹399</div></div>
+      <div class="price-row"><div><span class="price-name">Gel Manicure</span><span class="price-time">45 min</span></div><div class="price-amount">₹699</div></div>
+      <div class="price-row"><div><span class="price-name">Nail Art (per nail)</span><span class="price-time">–</span></div><div class="price-amount">₹60+</div></div>
+      <div class="price-row"><div><span class="price-name">French Tips</span><span class="price-time">40 min</span></div><div class="price-amount">₹799</div></div>
+      <div class="price-row"><div><span class="price-name">Pedicure</span><span class="price-time">45 min</span></div><div class="price-amount">₹499</div></div>
+      <div class="price-row"><div><span class="price-name">Spa Pedicure</span><span class="price-time">60 min</span></div><div class="price-amount">₹799</div></div>
+    </div>
+    <div id="bridal" class="price-list" style="display:none;">
+      <div class="price-row"><div><span class="price-name">Bridal Makeup</span><span class="price-time">2+ hrs</span></div><div class="price-amount">₹5,999</div></div>
+      <div class="price-row"><div><span class="price-name">Bridal Hair Styling</span><span class="price-time">1.5 hrs</span></div><div class="price-amount">₹2,999</div></div>
+      <div class="price-row"><div><span class="price-name">Pre-Bridal Package</span><span class="price-time">3 sessions</span></div><div class="price-amount">₹8,999</div></div>
+      <div class="price-row"><div><span class="price-name">Complete Bridal Package</span><span class="price-time">Full Day</span></div><div class="price-amount">₹14,999</div></div>
+      <div class="price-row"><div><span class="price-name">Reception Makeup</span><span class="price-time">1.5 hrs</span></div><div class="price-amount">₹3,999</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gal-inner">
+    <div class="section-top">
+      <div class="section-tag"><div class="dot" style="background:var(--rose)"></div><span>Photo Gallery</span></div>
+      <h2 class="section-title" style="color:var(--plum);">Our Work Speaks</h2>
+    </div>
+    <div class="gal-grid">
+      <div class="g-item">💅<div class="g-overlay"></div></div>
+      <div class="g-item">👰<div class="g-overlay"></div></div>
+      <div class="g-item">💆<div class="g-overlay"></div></div>
+      <div class="g-item">✨<div class="g-overlay"></div></div>
+      <div class="g-item">💇<div class="g-overlay"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="booking-inner">
+    <div style="margin-bottom:12px;"><span style="font-size:.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--blush);">✦ Book Appointment ✦</span></div>
+    <h2 class="booking-title">Reserve Your<br>Beauty Session</h2>
+    <p class="booking-sub">Book online or message us on WhatsApp for instant confirmation.</p>
+    <div class="booking-form">
+      <div class="bf"><label>Your Name</label><input type="text" placeholder="Full name"></div>
+      <div class="bf"><label>Phone Number</label><input type="tel" placeholder="+91 98765 43210"></div>
+      <div class="bf"><label>Date</label><input type="date"></div>
+      <div class="bf"><label>Time</label><input type="time"></div>
+      <div class="bf full"><label>Service Required</label>
+        <select>
+          <option>Signature Facial</option>
+          <option>Hair Styling & Cut</option>
+          <option>Nail Art & Manicure</option>
+          <option>Bridal Package</option>
+          <option>Hair Spa & Treatment</option>
+          <option>Body Polishing</option>
+          <option>Makeup Services</option>
+          <option>Threading & Waxing</option>
+        </select>
+      </div>
+      <div class="bf full"><label>Special Requests</label><textarea placeholder="Any specific requirements or skin concerns..."></textarea></div>
+      <button class="book-btn" onclick="alert('Appointment request received! We will confirm via WhatsApp shortly. 💅')">Confirm Appointment</button>
+      <div class="wa-note">
+        <p>Prefer instant confirmation?</p>
+        <a href="https://wa.me/919876543210?text=Hi%2C%20I'd%20like%20to%20book%20an%20appointment%20at%20Glamour%20Studio" class="wa-link" target="_blank">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.126 1.532 5.86L.073 23.927l6.244-1.635A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.66-.49-5.21-1.352l-.374-.222-3.872 1.014 1.04-3.796-.244-.39A9.975 9.975 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Book via WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Beauty-Studio</div>
+  <div class="footer-text">© 2025 Beauty-Studio, Belagavi. All rights reserved.</div>
+</footer>
+
+<script>
+function showPricing(btn, id) {
+  document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.price-list').forEach(p => p.style.display = 'none');
+  document.getElementById(id).style.display = 'flex';
+  document.getElementById(id).style.flexDirection = 'column';
+}
+</script>
+</body>
+</html>
