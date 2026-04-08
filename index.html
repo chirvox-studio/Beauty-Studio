@@ -135,6 +135,92 @@
   .wa-note p { color:rgba(249,240,245,0.5); font-size:.8rem; margin-bottom:12px; }
   .wa-link { display:inline-flex; align-items:center; gap:10px; background:#25D366; color:#fff; padding:12px 28px; text-decoration:none; font-size:.8rem; letter-spacing:2px; text-transform:uppercase; transition:.3s; border-radius:2px; }
   .wa-link:hover { background:#1da851; }
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: #111;
+  color: #fff;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: white;
+  transition: 0.3s;
+}
+
+/* Nav */
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  nav {
+    position: absolute;
+    top: 60px;
+    right: -100%;
+    width: 100%;
+    background: #111;
+    transition: 0.3s;
+  }
+
+  nav ul {
+    flex-direction: column;
+    padding: 20px;
+    gap: 15px;
+  }
+
+  nav.active {
+    right: 0;
+  }
+}
+
+/* Animation */
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
 
   /* FOOTER */
   footer { background:var(--deep); padding:30px 60px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
@@ -158,6 +244,13 @@
 <body>
 
 <nav>
+  <div class="logo">Chirvox</div>
+
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
   <div class="logo">Beauty-Studio</div>
   <ul class="nav-links">
     <li><a href="#hero">Home</a></li>
@@ -329,6 +422,13 @@ function showPricing(btn, id) {
   document.getElementById(id).style.display = 'flex';
   document.getElementById(id).style.flexDirection = 'column';
 }
+  const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  navMenu.classList.toggle('active');
+});
 </script>
 </body>
 </html>
